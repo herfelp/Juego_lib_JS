@@ -38,6 +38,7 @@ var drop_drag_elem = function(dat,num) {
                     $( "<img id='elem_"+d+e+"' src='"+c+"' class='elemento '  ></img>" ).prependTo("#div_"+d+e);
                     drop_drag_elem(a,b);
                     drop_drag_elem(d,e);
+                    marcar();
                   };
             return !validDrop;
         }
@@ -184,50 +185,66 @@ asignaid();
 
  //a cada elemento debe asignarsele una clase si debe o no desaparecer
 
-  //establecer cuantos espacios puede ver arriba abajo izquierda derecha
-
 var marcar = function(){
 
-   $(".elemento").each(function(key){
+  for (j=1;j<8;j++){
+     for (i=1;i<8;i++){
 
-              var coordi = this.id[5];
-              var coordj = this.id[6];
-              var id_elem = this.id;
-              var abajo = 7 - coordi;
-              var arriba = 6 - abajo;
-              var derecha = 7 - coordj
-              var izquierda = 6 - derecha;
+       var i_1 = String(i+1);
+       var i_2 = String(i+2);
+       var j_1 = String(j+1);
+       var j_2 = String(j+2);
 
-          for (var i = arriba+2; i < 8; i++) {
-            //console.log("abajo")
-            console.log($("#elem_"+i+""+coordj).attr('src'))
-            console.log($("#"+id_elem).attr('src'))
+       var a = $("#elem_"+i+j).attr('src');
+       var b = $("#elem_"+i_1+j).attr('src');
+       var c = $("#elem_"+i_2+j).attr('src');
 
-          };
+       var d = $("#elem_"+i+j).attr('src');
+       var e = $("#elem_"+i+j_1).attr('src');
+       var f = $("#elem_"+i+j_2).attr('src');
 
-          for (var i = abajo+2 ; i < 8; i++) {
-              var aux = 8-i;
-            //console.log("arriba")
 
-            //console.log($("#elem_"+aux+""+coordj))
-          };
+       if(a == b && b == c){
 
-          for (var j = izquierda+2; j < 8; j++) {
-            //console.log("derecha")
-            //console.log($("#elem_"+coordi+""+j))
-          };
 
-          for (var j = derecha+2 ; j < 8; j++) {
-            var aux = 8-j;
-            //console.log("izquierda")
+         $("#elem_"+i+j).addClass('marcar');
+        $("#elem_"+i_1+j).addClass('marcar');
+        $("#elem_"+i_2+j).addClass('marcar');
 
-            //console.log($("#elem_"+coordi+""+aux))
-          };
-          //arriba derecha
-   });
+       };
+
+       if(d == e && e == f){
+
+         $("#elem_"+i+j).addClass('marcar');
+        $("#elem_"+i+j_1).addClass('marcar');
+        $("#elem_"+i+j_2).addClass('marcar');
+
+       };
+
+     };
+
+  };
+
 };
 
 marcar();
+
+var runEffect_marc = function(){
+
+ $(".elemento").each(function(key){
+
+
+ 
+
+
+
+ });
+
+
+
+};
+
+runEffect_marc();
 
 
 //poner el puntaje y movimientos en cero
