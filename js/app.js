@@ -39,6 +39,7 @@ var drop_drag_elem = function(dat,num) {
                     drop_drag_elem(a,b);
                     drop_drag_elem(d,e);
                     marcar();
+                    runEffect_marc();
                   };
             return !validDrop;
         }
@@ -233,8 +234,14 @@ var runEffect_marc = function(){
 
  $(".elemento").each(function(key){
 
+ $(".elemento.marcar").toggle("pulsate", {times:3}, 2000 ,function(){
+   $(".elemento.marcar").parent().addClass("hide");
+   $(".elemento.marcar").addClass("hide");
+    $(".elemento.marcar").stop();
 
- 
+ });
+
+
 
 
 
