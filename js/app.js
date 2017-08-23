@@ -32,7 +32,7 @@ var drop_drag_elem = function(dat,num) {
 
                       var f =  $('#elem_'+d+e).attr('src');
 
-                     $('#elem_'+d+e).remove();
+                    $('#elem_'+d+e).remove();
 
                     $( "<img id='elem_"+a+b+"' src='"+f+"' class='elemento '  ></img>" ).prependTo("#div_"+a+b);
                     $( "<img id='elem_"+d+e+"' src='"+c+"' class='elemento '  ></img>" ).prependTo("#div_"+d+e);
@@ -53,7 +53,7 @@ var llenarpantalla = function(){
          $.each(cols,function(key){
                var num = key+1;
                var dat = 8-i
-                $( "<div id='div_"+dat+num+"' class ='elemento_div ' ></div>" ).prependTo(".col-"+num);
+                $( "<div id='div_"+dat+num+"' class ='elemento_div ' ></div>" ).appendTo(".col-"+num);
          });
      };
 };
@@ -70,10 +70,10 @@ llenarpantalla();
                 var num_1 = num-1;
                 var num_2 = (+num)+1;
 
-                $("#div_"+dat+num).addClass("cl_coord_"+dat_1+num);
-                $("#div_"+dat+num).addClass("cl_coord_"+dat_2+num);
-                $("#div_"+dat+num).addClass("cl_coord_"+dat+num_1);
-                $("#div_"+dat+num).addClass("cl_coord_"+dat+num_2);
+                  $("#div_"+dat+num).addClass("cl_coord_"+dat_1+num);
+                  $("#div_"+dat+num).addClass("cl_coord_"+dat_2+num);
+                  $("#div_"+dat+num).addClass("cl_coord_"+dat+num_1);
+                  $("#div_"+dat+num).addClass("cl_coord_"+dat+num_2);
 
              }else if (dat == 1 && num >1 && num <7) {
 
@@ -82,9 +82,9 @@ llenarpantalla();
                var num_1 = num-1;
                var num_2 = (+num)+1;
 
-               $("#div_"+dat+num).addClass("cl_coord_"+dat_2+num);
-               $("#div_"+dat+num).addClass("cl_coord_"+dat+num_1);
-               $("#div_"+dat+num).addClass("cl_coord_"+dat+num_2);
+                  $("#div_"+dat+num).addClass("cl_coord_"+dat_2+num);
+                  $("#div_"+dat+num).addClass("cl_coord_"+dat+num_1);
+                  $("#div_"+dat+num).addClass("cl_coord_"+dat+num_2);
 
              }else if (num == 1 && dat >1 && dat <7) {
 
@@ -93,9 +93,9 @@ llenarpantalla();
                var num_1 = num-1;
                var num_2 = (+num)+1;
 
-               $("#div_"+dat+num).addClass("cl_coord_"+dat_2+num);
-               $("#div_"+dat+num).addClass("cl_coord_"+dat_1+num);
-               $("#div_"+dat+num).addClass("cl_coord_"+dat+num_2);
+                  $("#div_"+dat+num).addClass("cl_coord_"+dat_2+num);
+                  $("#div_"+dat+num).addClass("cl_coord_"+dat_1+num);
+                  $("#div_"+dat+num).addClass("cl_coord_"+dat+num_2);
 
              }else if (num == 7 && dat >1 && dat <7) {
 
@@ -104,9 +104,9 @@ llenarpantalla();
                var num_1 = num-1;
                var num_2 = (+num)+1;
 
-               $("#div_"+dat+num).addClass("cl_coord_"+dat_2+num);
-               $("#div_"+dat+num).addClass("cl_coord_"+dat_1+num);
-               $("#div_"+dat+num).addClass("cl_coord_"+dat+num_1);
+                  $("#div_"+dat+num).addClass("cl_coord_"+dat_2+num);
+                  $("#div_"+dat+num).addClass("cl_coord_"+dat_1+num);
+                  $("#div_"+dat+num).addClass("cl_coord_"+dat+num_1);
 
              }else if (dat == 7 && num >1 && num <7) {
 
@@ -115,9 +115,9 @@ llenarpantalla();
                var num_1 = num-1;
                var num_2 = (+num)+1;
 
-               $("#div_"+dat+num).addClass("cl_coord_"+dat_1+num);
-               $("#div_"+dat+num).addClass("cl_coord_"+dat+num_1);
-               $("#div_"+dat+num).addClass("cl_coord_"+dat+num_2);
+                  $("#div_"+dat+num).addClass("cl_coord_"+dat_1+num);
+                  $("#div_"+dat+num).addClass("cl_coord_"+dat+num_1);
+                  $("#div_"+dat+num).addClass("cl_coord_"+dat+num_2);
 
              }else if (dat == 1 && num == 1) {
 
@@ -126,8 +126,8 @@ llenarpantalla();
                var num_1 = num-1;
                var num_2 = (+num)+1;
 
-                $("#div_"+dat+num).addClass("cl_coord_"+dat+num_2);
-                $("#div_"+dat+num).addClass("cl_coord_"+dat_2+num);
+                  $("#div_"+dat+num).addClass("cl_coord_"+dat+num_2);
+                  $("#div_"+dat+num).addClass("cl_coord_"+dat_2+num);
 
              }else if (dat == 1 && num == 7) {
 
@@ -136,8 +136,8 @@ llenarpantalla();
                var num_1 = num-1;
                var num_2 = (+num)+1;
 
-               $("#div_"+dat+num).addClass("cl_coord_"+dat+num_1);
-               $("#div_"+dat+num).addClass("cl_coord_"+dat_2+num);
+                  $("#div_"+dat+num).addClass("cl_coord_"+dat+num_1);
+                  $("#div_"+dat+num).addClass("cl_coord_"+dat_2+num);
 
              }else if (dat == 7 && num == 1) {
 
@@ -146,8 +146,8 @@ llenarpantalla();
                var num_1 = num-1;
                var num_2 = (+num)+1;
 
-               $("#div_"+dat+num).addClass("cl_coord_"+dat_1+num);
-               $("#div_"+dat+num).addClass("cl_coord_"+dat+num_2);
+                  $("#div_"+dat+num).addClass("cl_coord_"+dat_1+num);
+                  $("#div_"+dat+num).addClass("cl_coord_"+dat+num_2);
 
              }else if (dat == 7 && num == 7) {
 
@@ -156,10 +156,9 @@ llenarpantalla();
                var num_1 = num-1;
                var num_2 = (+num)+1;
 
-               $("#div_"+dat+num).addClass("cl_coord_"+dat_1+num);
-               $("#div_"+dat+num).addClass("cl_coord_"+dat+num_1);
+                  $("#div_"+dat+num).addClass("cl_coord_"+dat_1+num);
+                  $("#div_"+dat+num).addClass("cl_coord_"+dat+num_1);
              };
-
 //incorpora el panel de navegacion para cada elemento draggable
      drop_drag_elem(dat,num);
   };
@@ -207,51 +206,233 @@ var marcar = function(){
 
        if(a == b && b == c){
 
+           $("#elem_"+i+j).addClass('marcar');
+           $("#elem_"+i_1+j).addClass('marcar');
+           $("#elem_"+i_2+j).addClass('marcar');
 
-         $("#elem_"+i+j).addClass('marcar');
-        $("#elem_"+i_1+j).addClass('marcar');
-        $("#elem_"+i_2+j).addClass('marcar');
-
-       };
+        };
 
        if(d == e && e == f){
 
-         $("#elem_"+i+j).addClass('marcar');
-        $("#elem_"+i+j_1).addClass('marcar');
-        $("#elem_"+i+j_2).addClass('marcar');
+           $("#elem_"+i+j).addClass('marcar');
+           $("#elem_"+i+j_1).addClass('marcar');
+           $("#elem_"+i+j_2).addClass('marcar');
 
        };
-
      };
-
   };
-
 };
 
 marcar();
+
+
+
+
 
 var runEffect_marc = function(){
 
  $(".elemento").each(function(key){
 
- $(".elemento.marcar").toggle("pulsate", {times:3}, 2000 ,function(){
-   $(".elemento.marcar").parent().addClass("hide");
-   $(".elemento.marcar").addClass("hide");
-    $(".elemento.marcar").stop();
+     $(".elemento.marcar").toggle("pulsate", {times:3}, 1000 ,function(){
+     $(".elemento.marcar").parent().addClass("hide");
 
- });
-
-
-
-
-
- });
-
-
-
+     $(".elemento.marcar").remove();
+     //buscar_vacios();
+     });
+   });
 };
 
 runEffect_marc();
+
+
+
+ creartop = function(){
+
+       $("div[class^='col-']:has('.hide')").each(function(key){
+
+          console.log(this.id[4])
+          var j = this.id[4];
+
+          var yt = 7;
+            var ysec = 0;
+
+                var ju = 0;
+
+                for (i=1;i<8;i++){
+
+                 console.log("este es i: "+i)
+
+
+                    var $hid = $("#div_"+i+j);
+
+                       if($hid.hasClass('hide')){
+
+                         var ju = ju + 1;
+
+
+                         var ysec = yt + ju;
+
+
+                         console.log(this)
+
+
+                          console.log("numero ysec: "+ysec)
+                          var num_aleat = 1 + Math.floor(Math.random() * 4);
+
+                          console.log("#div_"+yt+j)
+
+                          $( "<img id='elem_"+ysec+j+"' src='./image/"+num_aleat+".png' class='elemento ' ></img>" ).appendTo("#div_"+yt+j);
+
+                       };
+
+                };
+
+
+         });
+ };
+
+
+
+
+
+ reemplaza = function(){
+
+   for (i=1;i<8;i++){
+      for(j=1;j<8;j++){
+
+        var $hid = $("#div_"+i+j);
+
+          if($hid.hasClass('hide') ){
+
+              console.log("tiene hide:")
+              console.log($("#div_"+i+j))
+
+            var k = String(i+1);
+            var count = 0;
+            var st = 0;
+
+            do{
+
+              var stop = 0;
+              var hid_1 = $("#div_"+k+j).hasClass("hide");
+              var t = k;
+
+                if (hid_1==false){
+
+
+                      if(i==7){
+
+                        console.log("crear nuevo en top:")
+                        console.log($("#div_"+i+j))
+
+
+                       }else{
+
+
+                             console.log("rellenar con:")
+                             console.log($("#div_"+t+j))
+
+                       };
+
+
+                      var count = count+1;
+                      var t = String(count+k);
+                      var stop = 1;
+
+                };
+
+                k++;
+             }while(k<7 && stop == 0);
+
+          }
+      };
+   };
+};
+
+
+
+crea_arr = function(){
+
+
+var arr = [];
+
+  for (i=1;i<8;i++){
+     for(j=1;j<8;j++){
+
+
+       var miniarr =[];
+       var $cel = $("#div_"+i+j);
+
+
+         if($cel.hasClass('hide') || $cel.hasClass('virt_hide')){
+
+
+
+           miniarr.push("x");
+           miniarr.push(i);
+           miniarr.push(j);
+
+           arr.push(miniarr);
+
+         }else{
+
+           miniarr.push(i);
+           miniarr.push(i);
+           miniarr.push(j);
+
+           arr.push(miniarr);
+
+         };
+
+     };
+  };
+
+return arr;
+
+console.log(arr)
+
+};
+
+
+
+
+var animacionbaja =function(y1,y2,x){
+
+         var n = y1 - y2;
+         var dist = (n * 96);
+         var im = $("#elem_"+y1+x).attr('src');
+
+               $("#elem_"+y1+x).removeClass("hide");
+
+               $("#elem_"+y1+x).animate({top: dist},1000,function() {
+
+               $("#elem_"+y1+x).stop();
+
+               $("#elem_"+y1+x).remove();
+               $("#elem_"+y2+x).remove();
+               $( "<img id='elem_"+y2+x+"' src='"+im+"' class='elemento ' ></img>" ).prependTo("#div_"+y2+x);
+
+               $("#div_"+y2+x).removeClass("hide");
+
+         });
+};
+
+
+ multipleanim = function(){
+
+var arr = [["7","3","2"],["8","4","2"],["9","5","2"],["8","2","7"],["3","2","4"],["5","5","2"]];
+
+      for (i=0;i<arr.length;i++){
+
+         var a = arr[i][0];
+         var b = arr[i][1];
+         var c = arr[i][2];
+
+     animacionbaja(a,b,c);
+
+      };
+};
+
 
 
 //poner el puntaje y movimientos en cero
