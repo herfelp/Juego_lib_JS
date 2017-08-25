@@ -7,7 +7,6 @@ $(".main-titulo").css("color", "white");
 //arreglo de columnas
 var cols = ["col-1","col-2","col-3","col-4","col-5","col-6","col-7"];
 
-//hacer el elemento dragabble
 
 var drop_drag_elem = function(dat,num) {
     $("#div_"+dat+num+"").droppable({
@@ -58,7 +57,11 @@ var llenarpantalla = function(){
      };
 };
 
-llenarpantalla();
+
+
+
+
+
 
 // esta función agrega la clase llamada cl_coord_dat_num a cada div habilitado para movimientos del respectivo dat_num
    var est_paneles = function(dat,num){
@@ -178,7 +181,11 @@ var asignaid = function(){
     });
 };
 
-asignaid();
+
+
+
+
+
 
 var establ_cu = function(){
 
@@ -231,8 +238,45 @@ var marcar = function(){
   };
 };
 
-marcar();
 
+
+var preparatablero = function(){
+
+  do{
+
+    $(".elemento").each(function(key){
+
+           //$(".elemento.marcar").parent().addClass("hide");
+
+           $(".elemento.marcar").remove();
+
+      });
+      $(".elemento_div").each(function(key){
+
+        var hjos = this.children.length;
+
+        if(hjos == 0){
+
+             var dat = this.id[4];
+             var num = this.id[5];
+             var num_aleat = 1 + Math.floor(Math.random() * 4);
+
+            $( "<img id='elem_"+dat+num+"' src='./image/"+num_aleat+".png' class='elemento ' ></img>" ).prependTo("#div_"+dat+num);
+
+        };
+
+      });
+
+      marcar();
+
+     var n = $(".elemento.marcar").length;
+
+
+  }while(n!=0);
+
+
+   establ_cu();
+};
 
 var runEffect_marc = function(){
 
@@ -246,9 +290,6 @@ var runEffect_marc = function(){
      });
    });
 };
-
-runEffect_marc();
-
 
 var crea_arr = function(){
 
@@ -307,16 +348,9 @@ var crea_arr = function(){
          arr.push(miniarr);
          a++;
        };
-
   };
-console.log(arr)
-
-
 crea_on_top(arr);
-
 };
-
-
 
 var animacionsube =function(y1,n,x){
 
@@ -340,7 +374,6 @@ var arreglosube = function(arr){
      var b = arr[i][1];
      var c = arr[i][2];
 
-
      if( a > 7){
 
        miniarrsube.push(a);
@@ -349,13 +382,8 @@ var arreglosube = function(arr){
        arrsube.push(miniarrsube);
 
          };
-
      };
-
         multipleanimsube(arrsube,arr);
-
-     console.log(arrsube)
-
 
 };
 
@@ -443,18 +471,14 @@ var animacionbaja =function(y1,y2,x){
 
       if(y1<7){
         var n = y1 - y2;
-
-
+ 
        }else{
 
            var n = 7 - y2;
 
-
        };
 
               var dist = (n * 96);
-
-
 
               $("#elem_"+y1+x).removeClass("hide");
               $("#div_"+y1+x).removeClass("hide");
@@ -462,7 +486,7 @@ var animacionbaja =function(y1,y2,x){
 
                   var im = $("#elem_"+y1+x).attr('src');
 
-                       $("#elem_"+y1+x).animate({top: dist},600,function() {
+                       $("#elem_"+y1+x).animate({top: dist},450,function() {
 
                              $("#elem_"+y1+x).stop();
 
@@ -476,6 +500,17 @@ var animacionbaja =function(y1,y2,x){
 
 };
 
+
+var init = function(){
+
+llenarpantalla();
+asignaid();
+marcar();
+preparatablero();
+
+};
+
+init();
 
 
 //poner el puntaje y movimientos en cero
