@@ -163,7 +163,6 @@ llenarpantalla();
      drop_drag_elem(dat,num);
   };
 
-
 //asignar ID a cada imagen de cada div y establecer el panel de navegacion y hacerlo draggable (init)
 var asignaid = function(){
 
@@ -181,9 +180,18 @@ var asignaid = function(){
 
 asignaid();
 
+var establ_cu = function(){
 
+  $(".elemento_div").each(function(key){
 
- //a cada elemento debe asignarsele una clase si debe o no desaparecer
+     var dat = this.id[4];
+     var num = this.id[5];
+
+    est_paneles(dat,num);
+ });
+
+};
+
 
 var marcar = function(){
 
@@ -226,9 +234,6 @@ var marcar = function(){
 marcar();
 
 
-
-
-
 var runEffect_marc = function(){
 
  $(".elemento").each(function(key){
@@ -237,7 +242,7 @@ var runEffect_marc = function(){
      $(".elemento.marcar").parent().addClass("hide");
 
      $(".elemento.marcar").remove();
-     //buscar_vacios();
+     crea_arr();
      });
    });
 };
@@ -245,192 +250,230 @@ var runEffect_marc = function(){
 runEffect_marc();
 
 
+var crea_arr = function(){
 
- creartop = function(){
+  var arr = [];
 
-       $("div[class^='col-']:has('.hide')").each(function(key){
-
-          console.log(this.id[4])
-          var j = this.id[4];
-
-          var yt = 7;
-            var ysec = 0;
-
-                var ju = 0;
-
-                for (i=1;i<8;i++){
-
-                 console.log("este es i: "+i)
-
-
-                    var $hid = $("#div_"+i+j);
-
-                       if($hid.hasClass('hide')){
-
-                         var ju = ju + 1;
-
-
-                         var ysec = yt + ju;
-
-
-                         console.log(this)
-
-
-                          console.log("numero ysec: "+ysec)
-                          var num_aleat = 1 + Math.floor(Math.random() * 4);
-
-                          console.log("#div_"+yt+j)
-
-                          $( "<img id='elem_"+ysec+j+"' src='./image/"+num_aleat+".png' class='elemento ' ></img>" ).appendTo("#div_"+yt+j);
-
-                       };
-
-                };
-
-
-         });
- };
-
-
-
-
-
- reemplaza = function(){
-
-   for (i=1;i<8;i++){
-      for(j=1;j<8;j++){
-
-        var $hid = $("#div_"+i+j);
-
-          if($hid.hasClass('hide') ){
-
-              console.log("tiene hide:")
-              console.log($("#div_"+i+j))
-
-            var k = String(i+1);
-            var count = 0;
-            var st = 0;
-
-            do{
-
-              var stop = 0;
-              var hid_1 = $("#div_"+k+j).hasClass("hide");
-              var t = k;
-
-                if (hid_1==false){
-
-
-                      if(i==7){
-
-                        console.log("crear nuevo en top:")
-                        console.log($("#div_"+i+j))
-
-
-                       }else{
-
-
-                             console.log("rellenar con:")
-                             console.log($("#div_"+t+j))
-
-                       };
-
-
-                      var count = count+1;
-                      var t = String(count+k);
-                      var stop = 1;
-
-                };
-
-                k++;
-             }while(k<7 && stop == 0);
-
-          }
-      };
-   };
-};
-
-
-
-crea_arr = function(){
-
-
-var arr = [];
-
-  for (i=1;i<8;i++){
      for(j=1;j<8;j++){
 
+       var cht = 0;
+
+       for (i=1;i<8;i++){
 
        var miniarr =[];
        var $cel = $("#div_"+i+j);
 
+       if (i==7){
 
-         if($cel.hasClass('hide') || $cel.hasClass('virt_hide')){
+              if($cel.hasClass('hide')){
+
+                   cht = cht +1;
+
+              }else{
+                var dtn = i - cht;
+
+                  miniarr.push(i);
+                  miniarr.push(dtn);
+                  miniarr.push(j);
+                  arr.push(miniarr);
+
+             };
+
+       }else{
+
+              if($cel.hasClass('hide')){
+
+                   cht = cht +1;
+
+              }else{
+               var dtn = i - cht;
+               miniarr.push(i);
+               miniarr.push(dtn);
+               miniarr.push(j);
+               arr.push(miniarr);
+            };
+         };
+      };
+
+       var u = 8 - cht;
+       var a = 8;
+
+       for (b = u; b < 8; b++){
+
+        var miniarr =[];
+         miniarr.push(a);
+         miniarr.push(b);
+         miniarr.push(j);
+         arr.push(miniarr);
+         a++;
+       };
+
+  };
+console.log(arr)
+
+
+crea_on_top(arr);
+
+};
 
 
 
-           miniarr.push("x");
-           miniarr.push(i);
-           miniarr.push(j);
+var animacionsube =function(y1,n,x){
 
-           arr.push(miniarr);
+         var dist = (n * 96);
 
-         }else{
+               $("#elem_"+y1+x).animate({bottom: dist},100,function() {
 
-           miniarr.push(i);
-           miniarr.push(i);
-           miniarr.push(j);
+                       $("#elem_"+y1+x).stop();
+            });
+};
 
-           arr.push(miniarr);
+
+var arreglosube = function(arr){
+
+  var arrsube = [];
+
+  for (i=0;i<arr.length;i++){
+    var miniarrsube = [];
+
+     var a = arr[i][0];
+     var b = arr[i][1];
+     var c = arr[i][2];
+
+
+     if( a > 7){
+
+       miniarrsube.push(a);
+       miniarrsube.push(3);
+       miniarrsube.push(c);
+       arrsube.push(miniarrsube);
 
          };
 
      };
-  };
 
-return arr;
+        multipleanimsube(arrsube,arr);
 
-console.log(arr)
+     console.log(arrsube)
+
+
+};
+
+
+var crea_on_top = function(arr){
+
+        for (i=0;i<arr.length;i++){
+
+           var a = arr[i][0];
+           var b = arr[i][1];
+           var c = arr[i][2];
+
+           if(a>7){
+
+               var num_aleat = 1 + Math.floor(Math.random() * 4);
+
+               $( "<img id='elem_"+a+c+"' src='./image/"+num_aleat+".png' class='elemento hide' ></img>" ).appendTo("#div_"+7+c);
+
+           };
+
+      };
+
+      arreglosube(arr);
 
 };
 
 
 
+var multipleanimsube = function(arrsube,arr){
+
+
+     for (i=0;i<arrsube.length;i++){
+
+       console.log("multipleanimsube")
+
+        var a = arrsube[i][0];
+        var b = arrsube[i][1];
+        var c = arrsube[i][2];
+
+        animacionsube(a,b,c);
+
+     };
+
+     setTimeout(function() {
+
+         multipleanim(arr);
+
+
+       }, 200);
+
+
+};
+
+
+var multipleanim = function(arr){
+
+
+     for (i=0;i<arr.length;i++){
+
+       console.log("multipleanim")
+
+        var a = arr[i][0];
+        var b = arr[i][1];
+        var c = arr[i][2];
+
+        animacionbaja(a,b,c);
+
+
+     };
+
+
+     setTimeout(function() {
+
+        establ_cu();
+        marcar();
+        runEffect_marc();
+
+
+     }, 1000);
+
+
+};
 
 var animacionbaja =function(y1,y2,x){
 
-         var n = y1 - y2;
-         var dist = (n * 96);
-         var im = $("#elem_"+y1+x).attr('src');
-
-               $("#elem_"+y1+x).removeClass("hide");
-
-               $("#elem_"+y1+x).animate({top: dist},1000,function() {
-
-               $("#elem_"+y1+x).stop();
-
-               $("#elem_"+y1+x).remove();
-               $("#elem_"+y2+x).remove();
-               $( "<img id='elem_"+y2+x+"' src='"+im+"' class='elemento ' ></img>" ).prependTo("#div_"+y2+x);
-
-               $("#div_"+y2+x).removeClass("hide");
-
-         });
-};
+      if(y1<7){
+        var n = y1 - y2;
 
 
- multipleanim = function(){
+       }else{
 
-var arr = [["7","3","2"],["8","4","2"],["9","5","2"],["8","2","7"],["3","2","4"],["5","5","2"]];
+           var n = 7 - y2;
 
-      for (i=0;i<arr.length;i++){
 
-         var a = arr[i][0];
-         var b = arr[i][1];
-         var c = arr[i][2];
+       };
 
-     animacionbaja(a,b,c);
+              var dist = (n * 96);
 
-      };
+
+
+              $("#elem_"+y1+x).removeClass("hide");
+              $("#div_"+y1+x).removeClass("hide");
+              $("#div_"+7+x).removeClass("hide");
+
+                  var im = $("#elem_"+y1+x).attr('src');
+
+                       $("#elem_"+y1+x).animate({top: dist},600,function() {
+
+                             $("#elem_"+y1+x).stop();
+
+                             $("#elem_"+y1+x).remove();
+                               $("#elem_"+y2+x).remove();
+                              $( "<img id='elem_"+y2+x+"' src='"+im+"' class='elemento ' ></img>" ).prependTo("#div_"+y2+x);
+
+                               $("#div_"+y2+x).removeClass("hide");
+
+                });
+
 };
 
 

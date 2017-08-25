@@ -102,11 +102,15 @@ div[class^='col']{
 .elemento{
   width: 99.4px;
   height: 96px;
+  position: absolute;
 
 }
 .elemento_div{
   width: 100px;
   height: 97px;
+  align-items: center;
+ position: relative;
+
 
 }
 .hide{
