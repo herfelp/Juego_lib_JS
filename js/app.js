@@ -22,12 +22,21 @@ var reloj = function(){
      var timer = new Timer({
 
          onstart : function(millisec) {
-             var sec = Math.round(millisec / 1000);
-             $("#timer").text(sec);
+
+
          },
          ontick  : function(millisec) {
-             var sec = Math.round(millisec / 1000);
-            $("#timer").text(sec);
+
+           var min = millisec / 1000 / 60;
+            var r = min % 1;
+            var sec = Math.floor(r * 60);
+            if (sec < 10) {
+              sec = '0'+sec;
+            }
+             min = Math.floor(min);
+
+
+            $("#timer").text('0'+min+':'+sec);
          },
          onstop  : function() {
 
@@ -45,14 +54,18 @@ var reloj = function(){
            $("#timer").text('02:00');
 
            setTimeout(function() {
-               $(".elemento").remove();
-             }, 900);
+
+             $(".elemento_div").each(function(key){
+                 this.remove();
+              });
+
+            }, 900);
 
 
          }
      });
 
-         timer.start(5);
+         timer.start(120);
 
      $stop.on('click', function() {
 
@@ -71,6 +84,11 @@ var reloj = function(){
             $(".elemento_div").each(function(key){
                 this.remove();
           });
+          mov = 0;
+         puntaje = 0;
+
+         movimiento();
+         punt();
 
       init();
 
@@ -93,6 +111,9 @@ var reloj = function(){
 
      movimiento();
      punt();
+       $("#movimientos-text").text("0");
+         $("#score-text").text("0");
+
     };
   });
 
