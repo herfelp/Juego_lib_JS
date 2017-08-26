@@ -26,6 +26,18 @@ body{
   width: 100%;
 }
 
+.juego_term{
+  font-family: gameFont;
+  font-size: 3em;
+  color: #DCFF0E;
+  width: 100%;
+  text-align: center;
+}
+
+.white{
+  color: white;
+}
+
 .panel-tablero{
   width: 70%;
   border: 10px solid #E87306;
@@ -36,8 +48,26 @@ body{
   flex-flow: row wrap;
 }
 
+.mini_panel{
+  width: 0%;
+  border: 0px solid #E87306;
+  background: rgba(232, 115, 6, 0.5);
+  border-radius: 0px;
+  height: 0px;
+  display: flex;
+  flex-flow: row wrap;
+}
+
 .panel-score{
   width: 25%;
+  height: 700px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+}
+
+.mini_panel-score{
+  width: 100%;
   height: 700px;
   display: flex;
   flex-flow: column nowrap;
@@ -103,16 +133,29 @@ div[class^='col']{
   width: 99.4px;
   height: 96px;
   position: absolute;
-
 }
+
 .elemento_div{
   width: 100px;
   height: 97px;
   align-items: center;
  position: relative;
+}
 
+.mini_elemento{
+  width: 99.4px;
+  height: 96px;
+  position: absolute;
+  opacity: 0;
 
 }
+
+
 .hide{
   visibility: hidden;
+}
+
+.disp_none{
+
+  display: none;
 }

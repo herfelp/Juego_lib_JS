@@ -1,12 +1,131 @@
 
 
-//El titulo cambia de color a blanco
 
-$(".main-titulo").css("color", "white");
 
-//arreglo de columnas
-var cols = ["col-1","col-2","col-3","col-4","col-5","col-6","col-7"];
 
+var punt = function(puntaje){
+
+  $("#score-text").text(puntaje);
+
+};
+
+  var movimiento = function(mov){
+
+  $("#movimientos-text").text(mov);
+
+  };
+
+
+var reloj = function(){
+     var $stop  = $(".btn-reinicio");
+
+     var timer = new Timer({
+
+         onstart : function(millisec) {
+             var sec = Math.round(millisec / 1000);
+             $("#timer").text(sec);
+         },
+         ontick  : function(millisec) {
+             var sec = Math.round(millisec / 1000);
+            $("#timer").text(sec);
+         },
+         onstop  : function() {
+
+            $("#timer").text('02:00');
+
+         },
+         onend   : function() {
+
+           $( "#panel-tablero" ).addClass( "mini_panel", 1000);
+           $( ".elemento" ).addClass( "mini_elemento", 1000);
+           $( ".panel-score" ).addClass( "mini_panel-score", 1000);
+           $( ".time" ).addClass( "disp_none", 50);
+           $( "<h1 class='juego_term'>Juego Terminado</h1>" ).prependTo("#panel-score");
+
+           $("#timer").text('02:00');
+
+           setTimeout(function() {
+               $(".elemento").remove();
+             }, 900);
+
+
+         }
+     });
+
+         timer.start(5);
+
+     $stop.on('click', function() {
+
+             timer.stop();
+
+     });
+
+};
+
+
+  $(".btn-reinicio").click(function(){
+
+    if($(".btn-reinicio")[0].innerText == "Iniciar"){
+
+      $(".btn-reinicio").text("Reiniciar");
+            $(".elemento_div").each(function(key){
+                this.remove();
+          });
+
+      init();
+
+    }else {
+      $("#timer").text('02:00');
+
+      $( "#panel-tablero" ).removeClass( "mini_panel");
+      $( ".elemento" ).removeClass( "mini_elemento");
+      $( ".panel-score" ).removeClass( "mini_panel-score");
+      $( ".time" ).removeClass( "disp_none");
+      $(".juego_term").remove();
+
+      $(".btn-reinicio").text("Iniciar");
+            $(".elemento_div").each(function(key){
+                this.remove();
+          });
+
+      mov = 0;
+     puntaje = 0;
+
+     movimiento();
+     punt();
+    };
+  });
+
+
+  var init = function(){
+
+  cols = ["col-1","col-2","col-3","col-4","col-5","col-6","col-7"];
+  mov = 0;
+  puntaje = 0;
+
+  llenarpantalla();
+  asignaid();
+  marcar();
+  preparatablero();
+  reloj();
+
+  };
+
+
+
+setTimeout(function() {
+    cambiacolor();
+  }, 1000);
+
+  var cambiacolor = function(){
+
+  setInterval(function(){
+
+   $(".main-titulo").toggleClass("white");
+
+ }, 500);
+
+  };
 
 var drop_drag_elem = function(dat,num) {
     $("#div_"+dat+num+"").droppable({
@@ -19,6 +138,8 @@ var drop_drag_elem = function(dat,num) {
             var validDrop = droppedElement && droppedElement.hasClass("cl_coord_"+dat+num);
 
                   if (validDrop == true){
+
+                    mov = mov +1;
 
                     var a = dat;
                     var b = num;
@@ -37,6 +158,7 @@ var drop_drag_elem = function(dat,num) {
                     $( "<img id='elem_"+d+e+"' src='"+c+"' class='elemento '  ></img>" ).prependTo("#div_"+d+e);
                     drop_drag_elem(a,b);
                     drop_drag_elem(d,e);
+                    movimiento(mov);
                     marcar();
                     runEffect_marc();
                   };
@@ -45,10 +167,10 @@ var drop_drag_elem = function(dat,num) {
     });
 };
 
-//llenar la pantalla con dulces aleatorios
 
 var llenarpantalla = function(){
      for(i=1;i<8;i++){
+
          $.each(cols,function(key){
                var num = key+1;
                var dat = 8-i
@@ -58,12 +180,6 @@ var llenarpantalla = function(){
 };
 
 
-
-
-
-
-
-// esta función agrega la clase llamada cl_coord_dat_num a cada div habilitado para movimientos del respectivo dat_num
    var est_paneles = function(dat,num){
 
             if (dat >1 && num >1 && dat <7 && num <7){
@@ -181,24 +297,17 @@ var asignaid = function(){
     });
 };
 
-
-
-
-
-
-
 var establ_cu = function(){
 
-  $(".elemento_div").each(function(key){
+    $(".elemento_div").each(function(key){
 
-     var dat = this.id[4];
-     var num = this.id[5];
+        var dat = this.id[4];
+        var num = this.id[5];
 
-    est_paneles(dat,num);
- });
+       est_paneles(dat,num);
+    });
 
 };
-
 
 var marcar = function(){
 
@@ -217,7 +326,6 @@ var marcar = function(){
        var d = $("#elem_"+i+j).attr('src');
        var e = $("#elem_"+i+j_1).attr('src');
        var f = $("#elem_"+i+j_2).attr('src');
-
 
        if(a == b && b == c){
 
@@ -238,15 +346,11 @@ var marcar = function(){
   };
 };
 
-
-
 var preparatablero = function(){
 
   do{
 
     $(".elemento").each(function(key){
-
-           //$(".elemento.marcar").parent().addClass("hide");
 
            $(".elemento.marcar").remove();
 
@@ -271,9 +375,7 @@ var preparatablero = function(){
 
      var n = $(".elemento.marcar").length;
 
-
   }while(n!=0);
-
 
    establ_cu();
 };
@@ -282,14 +384,33 @@ var runEffect_marc = function(){
 
  $(".elemento").each(function(key){
 
-     $(".elemento.marcar").toggle("pulsate", {times:3}, 1000 ,function(){
-     $(".elemento.marcar").parent().addClass("hide");
+   var cl =  $(".elemento").hasClass("marcar");
 
-     $(".elemento.marcar").remove();
-     crea_arr();
-     });
-   });
+       if(cl == true){
+        var pu = $(".elemento.marcar").length;
+         puntaje = (puntaje + (pu/49));
+         put = puntaje.toFixed(0)
+         pu_10 = put*10;
+         punt(pu_10);
+        };
+
+     $(".elemento.marcar").toggle("pulsate", {times:3}, 1000 ,function(){
+         $(".elemento.marcar").parent().addClass("hide");
+
+          $(".elemento.marcar").remove();
+
+          crea_arr();
+         });
+      });
+
+     $(".elemento_div").each(function(key){
+
+       $(".elemento_div")[0].className = $(".elemento_div")[0].className.replace(/\bcl_coord_.*?\b/g, '');
+
+    });
+
 };
+
 
 var crea_arr = function(){
 
@@ -313,10 +434,10 @@ var crea_arr = function(){
               }else{
                 var dtn = i - cht;
 
-                  miniarr.push(i);
-                  miniarr.push(dtn);
-                  miniarr.push(j);
-                  arr.push(miniarr);
+              miniarr.push(i);
+              miniarr.push(dtn);
+              miniarr.push(j);
+              arr.push(miniarr);
 
              };
 
@@ -362,7 +483,6 @@ var animacionsube =function(y1,n,x){
             });
 };
 
-
 var arreglosube = function(arr){
 
   var arrsube = [];
@@ -384,9 +504,7 @@ var arreglosube = function(arr){
          };
      };
         multipleanimsube(arrsube,arr);
-
 };
-
 
 var crea_on_top = function(arr){
 
@@ -401,23 +519,15 @@ var crea_on_top = function(arr){
                var num_aleat = 1 + Math.floor(Math.random() * 4);
 
                $( "<img id='elem_"+a+c+"' src='./image/"+num_aleat+".png' class='elemento hide' ></img>" ).appendTo("#div_"+7+c);
-
            };
-
       };
 
       arreglosube(arr);
-
 };
-
-
 
 var multipleanimsube = function(arrsube,arr){
 
-
      for (i=0;i<arrsube.length;i++){
-
-       console.log("multipleanimsube")
 
         var a = arrsube[i][0];
         var b = arrsube[i][1];
@@ -428,50 +538,32 @@ var multipleanimsube = function(arrsube,arr){
      };
 
      setTimeout(function() {
-
          multipleanim(arr);
-
-
        }, 200);
-
-
 };
 
 
 var multipleanim = function(arr){
-
-
      for (i=0;i<arr.length;i++){
-
-       console.log("multipleanim")
 
         var a = arr[i][0];
         var b = arr[i][1];
         var c = arr[i][2];
-
         animacionbaja(a,b,c);
-
-
      };
-
-
      setTimeout(function() {
 
         establ_cu();
         marcar();
         runEffect_marc();
-
-
      }, 1000);
-
-
 };
 
 var animacionbaja =function(y1,y2,x){
 
       if(y1<7){
         var n = y1 - y2;
- 
+
        }else{
 
            var n = 7 - y2;
@@ -486,7 +578,7 @@ var animacionbaja =function(y1,y2,x){
 
                   var im = $("#elem_"+y1+x).attr('src');
 
-                       $("#elem_"+y1+x).animate({top: dist},450,function() {
+                 $("#elem_"+y1+x).animate({top: dist},450,function() {
 
                              $("#elem_"+y1+x).stop();
 
@@ -499,19 +591,3 @@ var animacionbaja =function(y1,y2,x){
                 });
 
 };
-
-
-var init = function(){
-
-llenarpantalla();
-asignaid();
-marcar();
-preparatablero();
-
-};
-
-init();
-
-
-//poner el puntaje y movimientos en cero
-//poner el timmer en 2 min
